@@ -22,7 +22,7 @@ $rows = $lista -> num_rows;
     <?php include 'menu_adm.php'?>
    
     <main class="container">
-        <h2 class="breadcrumb alert-danger">Lista de Produtos</h2>
+        <h2 class="breadcrumb alert-success">Lista de Produtos</h2>
         <table class="table table-hover table-condensed tb-opacidade bg-warning">
             <thead>
                 <th class="hidden">ID</th>
