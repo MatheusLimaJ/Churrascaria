@@ -1,17 +1,17 @@
 <?php
 include 'acesso_com.php';
 include '../conn/connect.php';
-if($_POST)
+if($_POST) // Se o usuario clicou no botão atualizar
 {
-    if($_FILES['imagemfile']['name'])
+    if($_FILES['imagemfile']['name']) // se o usuário escolher uma imagem
     {
-        unlink("../images/" . $_POST['imagem_atual']); // apaga a imagem atual
+        unlink("../images/" . $_POST['imagem_atual']); // apaga a imagem atual do servidor de arquivos
         $nome_img = $_FILES['imagemfile']['name']; //atribui o nome da imagem na váriável $nome_img
         $tmp_img = $_FILES['imagemfile']['tmp_name'];
-        $rand = rand(100001, 999999);
+        $rand = rand(100001, 999999);  // gera  um número aleatório para imagem
         $dir_img = "../images/" .$rand.$nome_img;
-        move_uploaded_file($tmp_img, $dir_img);
-        $nome_img = $rand.$nome_img;
+        move_uploaded_file($tmp_img, $dir_img); // trasfere a imagem para pasta
+        $nome_img = $rand.$nome_img; // adiciona um novo nome
     }
     else
     {
@@ -24,18 +24,18 @@ if($_POST)
     $resumo = $_POST['resumo'];
     $valor = $_POST['valor'];
 
-    $update = "update set tipo_id = $id_tipo,
+    $update = "update produtos0, set tipo_id = $id_tipo,
                destaque = '$destaque',
                descricao = '$descricao',
                resumo = '$resumo',
                valor = $valor,
-               imagem = 'nome_img'
+               imagem = '$nome_img'
                where id = $id;";
 
     $resultado = $conn -> query($update);
     if($resultado)
     {
-        header('location: produtos_lista.php');
+        header('location:produtos_lista.php');
     }
 }
 if($_GET)
@@ -47,6 +47,8 @@ else
     $id_form = 0;
 }
 $lista = $conn -> query ("select * from produtos where id = $id_form");
+$row = $lista -> fetch_assoc();
+
 
 
 // selecionar a lista de tipos para preencher p <select>
@@ -83,7 +85,8 @@ $numLinhas = $listaTipo -> num_rows;
                     name="form_insere" enctype="multipart/form-data"
                     id="form_insere">
  
-                    <input type="hidden" name="id" id="id" value="">
+                    <!-- campo id deve permanecer oculto e por isso = "hidden" -->
+                    <input type="hidden" name="id" id="id" value=" <?php echo $row['id']; ?>  ">
                    
                     <label for="id_tipo">Tipo:</label>
                         <div class="input-group">
@@ -91,19 +94,35 @@ $numLinhas = $listaTipo -> num_rows;
                                 <span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>
                             </span>
                             <select name="id_tipo" id="id_tipo" class="form-control" required>
-                                    <option value="tipo">      
-                                   
+                                <?php do{ ?>
+                                    <option value="<?php echo $rowTipo['id']?>"
+                                        <?php 
+                                        // strc realiza comparação binary 
+                                        // onde se a primeira string for menor que a segunda retorna 0
+                                        // se a primeira for igual a segunda retorna 1
+                                            if(!(strcmp($rowTipo['id'], $row['tipo_id'])))
+                                            {
+                                                echo "selected=\"selected\" ";
+
+                                            }
+                                        ?>
+                                    >      
+                                        <?php echo $rowTipo['rotulo']?>
+
                                     </option>
- 
+                                <?php }while($rowTipo = $listaTipo -> fetch_assoc());?>
+                            
                             </select>
                         </div>
                         <label for="destaque">Destaque:</label>
                         <div class="input-group">
                             <label for="destaque_s" class="radio-inline">
-                                <input type="radio" name="destaque" id="destaque" value="Sim" <?php  ?> >Sim
+                                <input type="radio" name="destaque" id="destaque" value="Sim"
+                                <?php  echo $row['destaque'] == "Sim"? "checked" : null; ?> >Sim
                             </label>
                             <label for="destaque_n" class="radio-inline">
-                                <input type="radio" name="destaque" id="destaque" value="Não" <?php  ?> >Não
+                                <input type="radio" name="destaque" id="destaque" value="Não" 
+                                <?php echo $row['destaque'] == "Não"? "checked" : null; ?> >Não
                             </label>
                         </div>
                             <label for="descri">Descrição:</label>    
@@ -113,7 +132,7 @@ $numLinhas = $listaTipo -> num_rows;
                            </span>
                            <input type="text" name="descricao" id="descricao"
                                 class="form-control" placeholder="Digite a descrição do Produto"
-                                maxlength="100" value="<?php  ?>">
+                                maxlength="100" value="<?php echo $row['descricao']; ?>">
                         </div>  
                        
                         <label for="resumo">Resumo:</label>    
@@ -123,8 +142,10 @@ $numLinhas = $listaTipo -> num_rows;
                            </span>
                            <textarea  name="resumo" id="resumo"
                                 cols="30" rows="8"
-                                class="form-control" placeholder="Digite os detalhes do Produto"
-                                ></textarea>
+                                class="form-control" placeholder="Digite os detalhes do Produto">
+                        
+                                <?php echo $row['resumo']; ?>
+                            </textarea>
                         </div>
                        
                         <label for="valor">Valor:</label>    
@@ -133,12 +154,12 @@ $numLinhas = $listaTipo -> num_rows;
                                 <span class="glyphicon glyphicon-tags" aria-hidden="true"></span>
                            </span>
                            <input type="number" name="valor" id="valor"
-                                class="form-control" required min="0" step="0.01" value="<?php ?>">
+                                class="form-control" required min="0" step="0.01" value="<?php  echo $row['valor'];  ?>">
                         </div>  
  
                         <label for="imagem_atual">Imagem Atual:</label>
-                        <img src="../images/<?php  ?>" alt="" srcset="">
-                        <input type="hidden" name="imagem_atual" id="imagem_atual" value="<?php  ?>" >
+                        <img src="../images/<?php echo $row['imagem']; ?>" alt="" srcset="">
+                        <input type="hidden" name="imagem_atual" id="imagem_atual" value="<?php echo $row['imagem'];  ?>" >
  
                         <label for="imagem">Imagem Nova:</label>    
                         <div class="input-group">
