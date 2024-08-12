@@ -23,7 +23,7 @@ $rows = $lista -> num_rows;
     <?php include 'menu_adm.php'?>
    
     <main class="container">
-        <h2 class="breadcrumb alert-success">Lista de Tipos</h2>
+        <h2 class="breadcrumb alert-warning">Lista de Tipos</h2>
         <table class="table table-hover table-condensed tb-opacidade bg-warning">
             <thead>
                 <th class="hidden">ID</th>
@@ -59,12 +59,13 @@ $rows = $lista -> num_rows;
                            
                             <td>
                                 <a 
-                                    href="tipos_atualiza.php?id= <?php  ?>"
+                                    href="tipos_atualiza.php?id= <?php echo $row['id'] ?>"
                                     role="button" 
                                     class="btn btn-warning btn-block btn-xs">
 
                                     <span class="glyphicon glyphicon-refresh"></span>
                                     <span class="hidden-xs">ALTERAR</span>
+
                                 </a>
                                     <!-- não mostrar o botão excluir se o produto estiver em destaque -->
  

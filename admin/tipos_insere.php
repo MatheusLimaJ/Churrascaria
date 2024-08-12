@@ -5,18 +5,16 @@ include '../conn/connect.php';
 
 if($_POST)
 {
-    $id = $_POST['id_tipo'];
-    $destaque = $_POST['destaque'];
-    $descricao = $_POST['descricao'];
-    $resumo = $_POST['resumo'];
-    $valor = $_POST['valor'];
-    $imagem = $rand.$nome_img;
-    $insereProduto = "INSERT produtos (tipo_id, descricao, resumo, valor, imagem, destaque) 
-    values ($id, '$descricao', '$resumo', '$valor', '$imagem', '$destaque')";
-    $resultado = $conn -> query($insereProduto);
+    $id = $_POST['id'];
+    $sigla = $_POST['sigla'];
+    $rotulo = $_POST['rotulo'];
+
+    $insereTipo = "INSERT tipos(sigla, rotulo) 
+    values ('$sigla', '$rotulo')";
+    $resultado = $conn -> query($insereTipo);
     if(mysqli_insert_id($conn))
     {
-        header('location:produtos_lista.php');
+        header('location:tipos_lista.php');
     }
 }
 
@@ -44,16 +42,16 @@ $numLinhas = $listaTipo -> num_rows;
 <main class="container">
     <div class="row">
         <div class="col-xs-12 col-sm-offset-2 col-sm-6  col-md-8">
-            <h2 class="breadcrumb text-danger">
+            <h2 class="breadcrumb text-warning">
                 <a href="produtos_lista.php">
-                    <button class="btn btn-danger">
+                    <button class="btn btn-warning">
                         <span class="glyphicon glyphicon-chevron-left"></span>
                     </button>
                 </a>
                 Inserindo Tipos
             </h2>
             <div class="thumbnail">
-                <div class="alert alert-danger" role="alert">
+                <div class="alert alert-warning" role="alert">
                     <form action="tipos_insere.php" method="post"
                     name="form_insere" enctype="multipart/form-data"
                     id="form_insere">
@@ -83,7 +81,7 @@ $numLinhas = $listaTipo -> num_rows;
                   
 
                         <br>
-                        <input type="submit" name="enviar" id="enviar" class="btn btn-danger btn-block" value="Cadastrar">
+                        <input type="submit" name="enviar" id="enviar" class="btn btn-warning btn-block" value="Cadastrar">
                     </form>
                 </div>
             </div>

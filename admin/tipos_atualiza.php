@@ -9,7 +9,7 @@ if($_POST) // Se o usuario clicou no botão atualizar
 
     $update = "update tipos set 
 			   sigla = '$sigla',
-               rotulo = '$rotulo',
+               rotulo = '$rotulo'
                where id = $id;";
 
     $resultado = $conn -> query($update);
@@ -26,7 +26,7 @@ else
 {
     $id_form = 0; // senão recebe 0
 }
-$lista = $conn -> query ("select * from tipos where id = $id_form");
+$lista = $conn -> query("select * from tipos where id = $id_form");
 $row = $lista -> fetch_assoc();
  
  
@@ -56,18 +56,22 @@ $row = $lista -> fetch_assoc();
             </h2>
             <div class="thumbnail">
                 <div class="alert alert-danger" role="alert">
-                    <form action="tipos_insere.php" method="post"
-                    name="form_insere" enctype="multipart/form-data"
-                    id="form_insere">
+                    <form action="tipos_atualiza.php" method="post"
+                    name="form_atualiza" enctype="multipart/form-data"
+                    id="form_atualiza">
         
-                            <label for="rotulo">Rótulo:</label>    
+                       
+                    <input type="hidden" name="id" id="id" value=" <?php echo $row['id']; ?>  ">
+
+                    
+                    <label for="rotulo">Rótulo:</label>    
                         <div class="input-group">
                            <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span>
                            </span>
                            <input type="text" name="rotulo" id="rotulo"
                                 class="form-control" placeholder="Digite o Rotulo do tipo"
-                                maxlength="100" required>
+                                maxlength="100" value ="<?php echo $row['rotulo'] ?>" required>
                         </div>  
 
                         <br>
@@ -79,13 +83,13 @@ $row = $lista -> fetch_assoc();
                            </span>
                            <input type="text" name="sigla" id="sigla"
                                 class="form-control" placeholder="Digite a Sigla do tipo"
-                                maxlength="100" required>
+                                maxlength="100" value="<?php echo $row['sigla']?>" required>
                         </div>  
                        
                   
 
                         <br>
-                        <input type="submit" name="enviar" id="enviar" class="btn btn-danger btn-block" value="Cadastrar">
+                        <input type="submit" name="enviar" id="enviar" class="btn btn-danger btn-block" value="Alterar">
                     </form>
                 </div>
             </div>
