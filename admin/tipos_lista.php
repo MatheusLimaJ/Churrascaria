@@ -99,7 +99,7 @@ $rows = $lista -> num_rows;
                     </button>
                 </div>
                 <div class="modal-body">
-                    Deseja mesmo excluir o item?
+                    Deseja mesmo excluir o tipo?
                     <h4><span class="nome text-danger"></span></h4>
                 </div>
                 <div class="modal-footer">

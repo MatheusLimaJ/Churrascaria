@@ -1,35 +1,37 @@
 <?php
 include 'acesso_com.php';
 include '../conn/connect.php';
-// implementação backend a partir daqui...
-
-if($_POST)
+if($_POST) // Se o usuario clicou no botão atualizar
 {
-    $id = $_POST['id_tipo'];
-    $destaque = $_POST['destaque'];
-    $descricao = $_POST['descricao'];
-    $resumo = $_POST['resumo'];
-    $valor = $_POST['valor'];
-    $imagem = $rand.$nome_img;
-    $insereProduto = "INSERT produtos (tipo_id, descricao, resumo, valor, imagem, destaque) 
-    values ($id, '$descricao', '$resumo', '$valor', '$imagem', '$destaque')";
-    $resultado = $conn -> query($insereProduto);
-    if(mysqli_insert_id($conn))
+    $id = $_POST['id'];
+	$sigla = $_POST['sigla'];
+	$rotulo = $_POST['rotulo'];
+
+    $update = "update tipos set 
+			   sigla = '$sigla',
+               rotulo = '$rotulo',
+               where id = $id;";
+
+    $resultado = $conn -> query($update);
+    if($resultado)
     {
-        header('location:produtos_lista.php');
+        header('location:tipos_lista.php');
     }
 }
-
-// selecionar a lista de tipos para preencher p <select>
-$listaTipo = $conn -> query("select * from tipos order by rotulo");
-$rowTipo = $listaTipo -> fetch_assoc();
-$numLinhas = $listaTipo -> num_rows;
-
-
-
-
+if($_GET) // se vier dados enviados via get
+{
+    $id_form = $_GET['id']; // $id_form recebe o que foi enviado via get
+}
+else
+{
+    $id_form = 0; // senão recebe 0
+}
+$lista = $conn -> query ("select * from tipos where id = $id_form");
+$row = $lista -> fetch_assoc();
+ 
  
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -37,10 +39,10 @@ $numLinhas = $listaTipo -> num_rows;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/estilo.css">
-    <title>Tipos - Insere</title>
+    <title>Tipos - Altera</title>
 </head>
 <body>
-    
+
 <main class="container">
     <div class="row">
         <div class="col-xs-12 col-sm-offset-2 col-sm-6  col-md-8">
@@ -50,7 +52,7 @@ $numLinhas = $listaTipo -> num_rows;
                         <span class="glyphicon glyphicon-chevron-left"></span>
                     </button>
                 </a>
-                Inserindo Tipos
+                Alterando Tipos
             </h2>
             <div class="thumbnail">
                 <div class="alert alert-danger" role="alert">

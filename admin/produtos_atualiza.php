@@ -24,7 +24,7 @@ if($_POST) // Se o usuario clicou no botão atualizar
     $resumo = $_POST['resumo'];
     $valor = $_POST['valor'];
 
-    $update = "update produtos0, set tipo_id = $id_tipo,
+    $update = "update produtos set tipo_id = $id_tipo,
                destaque = '$destaque',
                descricao = '$descricao',
                resumo = '$resumo',
