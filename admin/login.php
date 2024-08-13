@@ -21,6 +21,7 @@ if($_POST)
 
     if($numRow > 0)
     {
+        $_SESSION['cliente_id'] = $rowLogin['id'];
         $_SESSION['login_usuario'] = $login;
         $_SESSION['nivel_usuario'] = $rowLogin['nivel'];
         $_SESSION['nome_da_sessao'] = session_name();
@@ -30,7 +31,7 @@ if($_POST)
         }
         else
         {
-            echo "<script>window.open('../cliente/index.php?cliente=" . $login . "','_self')</script>";
+            echo "<script>window.open('../cliente/pedido_solicita.php?cliente=" . $login . "','_self')</script>";
         }    
     }
     else

@@ -1,6 +1,7 @@
 <?php 
-    include '../admin/acesso_com.php';
-    include "acesso_com.php"
+ if(!isset($_SESSION)){
+        include '../admin/acesso_com.php';
+    }
 ?>
 
 <!DOCTYPE html>
@@ -13,10 +14,7 @@
     <title>Área Cliente - Chuleta Quente</title>
 </head>
 <body >
-    <?php include 'menu_publico.php'; ?>
-    <div class="container">
-  
-    </div>
+  <?php include 'menu_cliente.php';?> 
 </body>
 </html>
 

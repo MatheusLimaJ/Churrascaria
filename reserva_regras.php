@@ -35,7 +35,8 @@
                 </strong>
             </p>
 
-            <a href="cliente/pedido_insere.php">
+
+            <a href="admin/login.php">
                 <button class="btn btn-danger btn-block" aria-label="enviar" role="button">
                     Reservar
                     <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
