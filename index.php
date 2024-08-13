@@ -36,10 +36,15 @@
     <!-- area geral de produtos -->
     <a class="pt-6" name="produtos">&nbsp;</a>
     <?php include 'produtos_geral.php'; ?>
+
+    <!-- area geral de produtos -->
+    <a class="pt-6" name="reservar">&nbsp;</a>
+    <?php include 'reserva_regras.php'; ?>
     
     <!-- Rodapé -->
     <footer class="panel-footer" style="background: none;">
         <?php include 'rodape.php' ?>
+        <a href=""></a>
         <a name="contato"></a>
     </footer>
     </main>

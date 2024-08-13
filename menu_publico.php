@@ -30,6 +30,11 @@ $rows_tipos = $lista_tipos->fetch_all(); //retornar todos na forma de matriz
                         <span class="glyphicon glyphicon-home"></span>
                     </a>
                 </li>
+
+                <li>
+                    <a href="index.php#reservar"> RESERVAR </a>
+                </li>
+                
                 <li>
                     <a href="index.php#destaques"> DESTAQUES </a>
                 </li>

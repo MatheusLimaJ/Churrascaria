@@ -9,6 +9,21 @@
 <body>
 <div class="row panel-footer fundo-rodape">
         <!-- area de localização -->
+       
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel-footer" style="background: red;">
+                        <i>
+                            <strong style="color: #FFFFFF; background-color: #FF0000;">30% de desconto no valor do rodízio e 
+                                15% de desconto em todas as bebidas em reservas com mais de 5 pessoas!</strong>
+                        </i>
+                    </div>
+                </div>
+            </div>
+
+        <br>
+
+        
         <div class="col-sm-6 col-md-4">
             <div class="panel-footer" style="background: none;" >
                 <img src="images/logochurrascopequeno.png" alt="logo_pequeno" >

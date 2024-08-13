@@ -1,15 +1,29 @@
 <?php 
     include '../admin/acesso_com.php';
-
+    include "acesso_com.php"
 ?>
 
-<h2>
-    <strong>
-        <?php 
-            echo $_GET['cliente']
-        ?>     
-    </strong>, Bem vindo à área de cliente!
-</h2>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/estilo.css">
+    <title>Área Cliente - Chuleta Quente</title>
+</head>
+<body >
+    <?php include 'menu_publico.php'; ?>
+    <div class="container">
+  
+    </div>
+</body>
+</html>
+
+
+
+
+
 
 <a href="../admin/logout.php">
     sair
