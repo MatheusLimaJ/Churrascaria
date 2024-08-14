@@ -64,6 +64,7 @@ $numLinhas = $listaTipo -> num_rows;
                            <input type="text" name="rotulo" id="rotulo"
                                 class="form-control" placeholder="Digite o Rotulo do tipo"
                                 maxlength="100" required>
+                                
                         </div>  
 
                         <br>

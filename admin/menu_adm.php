@@ -23,6 +23,7 @@
                 </button>
             </li>
             <li class="active"><a href="index.php">ADMIN</a></li>
+            <li><a href="pedidos_lista.php">PEDIDOS</a></li>
             <li><a href="produtos_lista.php">PRODUTOS</a></li>
             <li><a href="tipos_lista.php">TIPOS</a></li>
             <li><a href="usuarios_lista.php">USUÁRIOS</a></li>

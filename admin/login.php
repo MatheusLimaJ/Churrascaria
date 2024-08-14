@@ -21,6 +21,7 @@ if($_POST)
 
     if($numRow > 0)
     {
+        $_SESSION['usuario_id'] = $rowLogin['id'];
         $_SESSION['cliente_id'] = $rowLogin['id'];
         $_SESSION['login_usuario'] = $login;
         $_SESSION['nivel_usuario'] = $rowLogin['nivel'];

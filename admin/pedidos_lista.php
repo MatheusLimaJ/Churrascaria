@@ -2,7 +2,7 @@
 
 include 'acesso_com.php';
 include '../conn/connect.php';
-$lista = $conn ->query("select * from tipos");
+$lista = $conn ->query("select * from pedidos");
 $row = $lista -> fetch_assoc(); // fetch_assoc() = método que cria uma array associativa
 $rows = $lista -> num_rows;
 
@@ -14,7 +14,7 @@ $rows = $lista -> num_rows;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tipos - Lista</title>
+    <title>Pedidos - Lista</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/estilo.css">
 </head>
@@ -23,13 +23,17 @@ $rows = $lista -> num_rows;
     <?php include 'menu_adm.php'?>
    
     <main class="container">
-        <h2 class="breadcrumb alert-success">Lista de Tipos</h2>
+        <h2 class="breadcrumb alert-success">Lista pedidos de reserva</h2>
         <table class="table table-hover table-condensed tb-opacidade bg-warning">
             <thead>
                 <th class="hidden">ID</th>
                 <th></th>
-                <th>ROTULO</th>
-                <th>SIGLA</th>
+                <th>DATA</th>
+                <th>HORÁRIO</th>
+                <th>PESSOAS</th>
+                <th>MOTIVO</th>
+                <th>STATUS</th>
+                
                 <th>
                     <a href="tipos_insere.php" target="_self" class="btn btn-block btn-primary btn-xs" role="button">
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
@@ -47,37 +51,55 @@ $rows = $lista -> num_rows;
                             </td>
                             <td></td>
                             <td>
-                               <?php echo $row['rotulo']?>
+                               <?php echo $row['data_escolhida']?>
                                 <span class="visible-xs"></span>
                                 <spin class="hidden-xs"></spin>
                             </td>
                             <td>
                                 <?php 
-                                    echo $row['sigla'];
+                                    echo $row['horario'];
+                                ?>
+                            </td>
+
+                            <td>
+                                <?php 
+                                    echo $row['pessoas'];
+                                ?>
+                            </td>
+
+                            <td>
+                                <?php 
+                                    echo $row['motivo'];
                                 ?>
                             </td>
                            
                             <td>
-                                <a 
-                                    href="tipos_atualiza.php?id= <?php echo $row['id'] ?>"
-                                    role="button" 
-                                    class="btn btn-warning btn-block btn-xs">
+                                <?php 
+                                    echo $row['status'];
+                                ?>
+                            </td>
 
-                                    <span class="glyphicon glyphicon-refresh"></span>
-                                    <span class="hidden-xs">ALTERAR</span>
+                            <td>
+                                <a 
+                                    href="pedido_reserva.php?id= <?php echo $row['id'] ?>"
+                                    role="button" 
+                                    class="btn btn-success btn-block btn-xs">
+
+                                    <span class="glyphicon glyphicon-ok"></span>
+                                    <span class="hidden-xs">ACEITAR</span>
 
                                 </a>
-                           
+                     
                                 
                                 <button
-                                    data-nome="<?php echo $row['rotulo']; ?>"
-                                    data-id="<?php echo $row['sigla']; ?>"
+                                    data-nome="<?php echo $row['motivo']; ?>"
+                                    data-id="<?php echo $row['status']; ?>"
                                     class="delete btn btn-xs btn-block btn-danger"
                                 >
                                     <span class="glyphicon glyphicon-trash"></span>
-                                    <span class="hidden-xs"> EXCLUIR</span>
+                                    <span class="hidden-xs"> CANCELAR</span>
                                 </button>
-
+                                
                             </td>
                         </tr>
                 <?php }while($row = $lista -> fetch_assoc()); ?>
@@ -118,7 +140,7 @@ $rows = $lista -> num_rows;
 <script src="../js/bootstrap.min.js"></script>
 <script type="text/javascript">
     $('.delete').on('click',function(){
-        var nome = $(this).data('nome'); //busca o nome com a descrição (data-nome)
+        var nome = $(this).data('motivo'); //busca o nome com a descrição (data-nome)
         var id = $(this).data('id'); // busca o id (data-id)
         //console.log(id + ' - ' + nome); //exibe no console
         $('span.nome').text(nome); // insere o nome do item na confirmação
