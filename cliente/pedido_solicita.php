@@ -1,15 +1,12 @@
 <?php
 
-session_start();
+include "acesso_com.php";
 include '../conn/connect.php';
-include 'acesso_com.php';
+
 // implementação backend a partir daqui...
 
-if (!isset($_SESSION['cliente_id'])) {
-    // Redirecione se a sessão não estiver definida
-    header("Location: login.php");
-    exit();
-}
+
+
 
 $cliente_id = $_SESSION['cliente_id'];
 
@@ -27,7 +24,7 @@ if($_POST)
             $inserePedido = "INSERT into pedidos(cliente_id, usuario_id, data_escolhida, horario, pessoas, motivo, status, motivo_negacao) 
             values ($cliente_id, $usuario_id, '$data_escolhida', '$horario', $pessoas, '$motivo', '$status', '$motivo_negacao')";
             $resultado = $conn -> query($inserePedido);
-            if ($conn->query($inserePedido) === TRUE) {
+            if ($resultado){
                 echo "Pedido inserido com sucesso!";
             } else {
                 echo "Erro ao inserir pedido: " . $conn->error;

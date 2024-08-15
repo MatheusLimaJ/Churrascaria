@@ -25,7 +25,7 @@ if($_POST)
         $_SESSION['nome_da_sessao'] = session_name();
 
         // Redireciona usando header()
-        header("Location: ../cliente/pedido_solicita.php?cliente=" . urlencode($login));
+        header("Location: pedido_solicita.php?cliente=" . $login);
         exit();
     } else {
         // Redireciona usando header()

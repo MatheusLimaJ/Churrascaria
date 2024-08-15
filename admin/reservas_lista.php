@@ -4,12 +4,25 @@ include 'acesso_com.php';
 include '../conn/connect.php';
 
 
-$lista = $conn ->query("select * from reservas where ativo = 1");
-$row = $lista -> fetch_assoc(); // fetch_assoc() = método que cria uma array associativa
-$rows = $lista -> num_rows;
+// $lista = $conn ->query("select * from reservas where ativo = 1");
+// $row = $lista -> fetch_assoc(); // fetch_assoc() = método que cria uma array associativa
+// $rows = $lista -> num_rows;
 
-$listaCliente = $conn -> query("select * from clientes where id =" . $_SESSION['cliente_id']);
-$rowCliente = $listaCliente -> fetch_assoc();
+
+// $listaPedido = $conn ->query("select * from pedidos");
+// $rowPedido = $listaPedido -> fetch_assoc(); // fetch_assoc() = método que cria uma array associativa
+// $rowsP = $listaPedido -> num_rows;
+
+
+// $listaCliente = $conn -> query("select * from clientes where id =" . $rowPedido['cliente_id']);
+// $rowCliente = $listaCliente -> fetch_assoc();
+
+$lista = $conn->query("SELECT * FROM vw_reservas_completas WHERE reserva_ativo = 1");
+$row = $lista->fetch_assoc(); // Método que cria um array associativo
+$rows = $lista->num_rows;
+
+
+
 
 
 
@@ -34,9 +47,11 @@ $rowCliente = $listaCliente -> fetch_assoc();
             <thead>
                 <th class="hidden">ID</th>
                 <th></th>
+                <th>id - Cliente</th>
                 <th>Cliente</th>
                 <th>CPF</th>
                 <th>PEDIDO</th>
+                <th>MOTIVO</th>
                 <th>HORÁRIO</th>
                 <th>DATA</th>
                 <th>MESA</th>
@@ -54,19 +69,25 @@ $rowCliente = $listaCliente -> fetch_assoc();
                 <?php do{ ?>
                         <tr>
                             <td class="hidden">
-                                <?php echo $row['id']; ?>
+                                <?php echo $row['reserva_id']; ?>
                             </td>
                             <td></td>
 
                             <td>
-                               <?php echo $rowCliente['nome']?>
+                               <?php echo $row['cliente_id']?>
+                                <span class="visible-xs"></span>
+                                <spin class="hidden-xs"></spin>
+                            </td>
+                            
+                            <td>
+                               <?php echo $row['cliente_nome']?>
                                 <span class="visible-xs"></span>
                                 <spin class="hidden-xs"></spin>
                             </td>
 
                             <td>
                                <?php 
-                               echo $rowCliente['cpf']?>
+                               echo $row['cliente_cpf']?>
                                 <span class="visible-xs"></span>
                                 <spin class="hidden-xs"></spin>
                             </td>
@@ -76,28 +97,34 @@ $rowCliente = $listaCliente -> fetch_assoc();
                                 <span class="visible-xs"></span>
                                 <spin class="hidden-xs"></spin>
                             </td>
+
+                            <td>
+                               <?php echo $row['pedido_motivo']?>
+                                <span class="visible-xs"></span>
+                                <spin class="hidden-xs"></spin>
+                            </td>
                             
                             <td>
-                               <?php echo $row['horario']?>
+                               <?php echo $row['reserva_horario']?>
                                 <span class="visible-xs"></span>
                                 <spin class="hidden-xs"></spin>
                             </td>
                             <td>
                                 <?php 
-                                    echo $row['data'];
+                                    echo $row['reserva_data'];
                                 ?>
                             </td>
 
                             <td>
                                 <?php 
-                                    echo $row['mesa_id'];
+                                    echo $row['reserva_mesa_id'];
                                 ?>
                             </td>
 
                            
                             <td>
                             <a 
-                                href="reservas_atualiza.php?id= <?php echo $row['id'] ?>"
+                                href="reservas_atualiza.php?id= <?php echo $row['reserva_id'] ?>"
                                 role="button" 
                                 class="btn btn-warning btn-block btn-xs">
 
@@ -107,8 +134,8 @@ $rowCliente = $listaCliente -> fetch_assoc();
                      
                                 
                                 <button
-                                    data-nome="<?php echo $row['data']; ?>"
-                                    data-id="<?php echo $row['id']; ?>"
+                                    data-nome="<?php echo $row['reserva_data']; ?>"
+                                    data-id="<?php echo $row['reserva_id']; ?>"
                                     class="delete btn btn-xs btn-block btn-danger"
                                 >
                                     <span class="glyphicon glyphicon-trash"></span>

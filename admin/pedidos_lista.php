@@ -2,7 +2,7 @@
 
 include 'acesso_com.php';
 include '../conn/connect.php';
-$lista = $conn ->query("select * from pedidos");
+$lista = $conn ->query('select * from pedidos where status != "A" and status != "C"');
 $row = $lista -> fetch_assoc(); // fetch_assoc() = método que cria uma array associativa
 $rows = $lista -> num_rows;
 
@@ -93,7 +93,7 @@ $rows = $lista -> num_rows;
                                 
                                 <button
                                     data-nome="<?php echo $row['motivo']; ?>"
-                                    data-id="<?php echo $row['status']; ?>"
+                                    data-id="<?php echo $row['id']; ?>"
                                     class="delete btn btn-xs btn-block btn-danger"
                                 >
                                     <span class="glyphicon glyphicon-trash"></span>
@@ -144,7 +144,7 @@ $rows = $lista -> num_rows;
         var id = $(this).data('id'); // busca o id (data-id)
         //console.log(id + ' - ' + nome); //exibe no console
         $('span.nome').text(nome); // insere o nome do item na confirmação
-        $('a.delete-yes').attr('href','produtos_excluir.php?id='+id); //chama o arquivo php para excluir o produto
+        $('a.delete-yes').attr('href','pedido_cancela.php?id='+id); //chama o arquivo php para excluir o produto
         $('#modalEdit').modal('show'); // chamar o modal
     });
 </script>

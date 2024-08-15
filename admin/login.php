@@ -29,10 +29,6 @@ if($_POST)
         {
             echo "<script>window.open('index.php','_self')</script>";
         }
-        else
-        {
-            echo "<script>window.open('../cliente/pedido_solicita.php?cliente=" . $login . "','_self')</script>";
-        }    
     }
     else
     {

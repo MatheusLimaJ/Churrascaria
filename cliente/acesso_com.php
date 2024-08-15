@@ -1,7 +1,7 @@
 <?php 
 
 session_name('chuletaaa'); // Define um nome para a Sessão
-
+session_start();
 // Uso da ! para negação
 if(!isset($_SESSION)) // Se não estiver atribuido
 {
@@ -14,7 +14,7 @@ if(!isset($_SESSION)) // Se não estiver atribuido
 if(!isset($_SESSION['login_cliente']))
 {
     // se não existir, redirecionamos a sessão por segurança
-    header('location: ../cliente/pedido_solicita.php'); // redirecionamento
+    header('location: ../cliente/login.php'); // redirecionamento
     exit; 
 }
 

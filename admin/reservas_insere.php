@@ -15,10 +15,11 @@ if ($_POST) { // Se o usuário clicou no botão atualizar
     $data_escolhida = $row['data_escolhida'];
     $horario = $row['horario'];
     $pessoas = $row['pessoas'];
+    $ativo = 1;
 
-    $insert = "INSERT INTO reservas (pedido_id, mesa_id, data, horario) VALUES ('$pedido_id', '$mesa_id', '$data_escolhida', '$horario')";
+    $insert = "INSERT INTO reservas (pedido_id, mesa_id, data, horario, ativo) VALUES ('$pedido_id', '$mesa_id', '$data_escolhida', '$horario', '$ativo')";
     $resultado = $conn->query($insert);
-
+    
     if ($resultado) {
         header('Location: reservas_lista.php');
     } else {
