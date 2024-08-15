@@ -1,6 +1,6 @@
 <?php 
  if(!isset($_SESSION)){
-        include '../admin/acesso_com.php';
+        include 'acesso_com.php';
     }
 ?>
 

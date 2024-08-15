@@ -6,10 +6,10 @@ include '../conn/connect.php';
 if($_POST)
 {
     $login = $_POST['login'];
-    $senha = md5($_POST['senha']);
-    $loginRes = $conn->query("select * from usuarios where login = '$login' and senha = '$senha' ");
+    $loginRes = $conn->query("select * from clientes where telefone = '$login' or cpf = '$login'");
     $rowLogin = $loginRes -> fetch_assoc();
     $numRow = $loginRes->num_rows;
+
 
     // se a sessão não existir 
     if(!isset($_SESSION))
@@ -19,24 +19,18 @@ if($_POST)
         $session_name_new = session_name();
     }
 
-    if($numRow > 0)
-    {
-        $_SESSION['usuario_id'] = $rowLogin['id'];
-        $_SESSION['login_usuario'] = $login;
-        $_SESSION['nivel_usuario'] = $rowLogin['nivel'];
+     if ($numRow > 0) {
+        $_SESSION['cliente_id'] = $rowLogin['id'];
+        $_SESSION['login_cliente'] = $login;
         $_SESSION['nome_da_sessao'] = session_name();
-        if($rowLogin['nivel'] == 'sup')
-        {
-            echo "<script>window.open('index.php','_self')</script>";
-        }
-        else
-        {
-            echo "<script>window.open('../cliente/pedido_solicita.php?cliente=" . $login . "','_self')</script>";
-        }    
-    }
-    else
-    {
-        echo "<script>window.open('invasor.php','_self')</script>";
+
+        // Redireciona usando header()
+        header("Location: ../cliente/pedido_solicita.php?cliente=" . urlencode($login));
+        exit();
+    } else {
+        // Redireciona usando header()
+        header("Location: invasor.php");
+        exit();
     }
 
 
@@ -83,13 +77,7 @@ if($_POST)
                                         </span>
                                         <input type="text" name="login" id="login" class="form-control" autofocus required autocomplete="off" placeholder="Digite seu login.">
                                     </p>
-                                    <label for="senha">Senha:</label>
-                                    <p class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="glyphicon glyphicon-qrcode text-info" aria-hidden="true"></span>
-                                        </span>
-                                        <input type="password" name="senha" id="senha" class="form-control" required autocomplete="off" placeholder="Digite sua senha.">
-                                    </p>
+                                
                                     <p class="text-right">
                                         <input type="submit" value="Entrar" class="btn btn-primary">
                                     </p>

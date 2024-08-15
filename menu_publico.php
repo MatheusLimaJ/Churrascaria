@@ -75,7 +75,13 @@ $rows_tipos = $lista_tipos->fetch_all(); //retornar todos na forma de matriz
                 <!-- fim formulario de busca  -->
                 <li class="active">
                     <a href="admin/index.php">
-                        <span class="glyphicon glyphicon-user">&nbsp; ADMIN/CLIENTE</span>
+                        <span class="glyphicon glyphicon-user">&nbsp; ADMIN</span>
+                    </a>
+                </li>
+
+                <li class="active">
+                    <a href="cliente/index.php">
+                        <span class="glyphicon glyphicon-user">&nbsp; CLIENTE</span>
                     </a>
                 </li>
 

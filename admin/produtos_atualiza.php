@@ -103,7 +103,6 @@ $numLinhas = $listaTipo -> num_rows;
                                             if(!(strcmp($rowTipo['id'], $row['tipo_id'])))
                                             {
                                                 echo "selected=\"selected\" ";
-
                                             }
                                         ?>
                                     >      
